@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="journalfabricationetcetera.controller.InventoryController">
+    <items>
+        <AnchorPane>
+            <children>
+                <TableView fx:id="stockTableView" layoutX="80.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="nameTableColumn" prefWidth="75.0" text="Nom" />
+                        <TableColumn fx:id="lastQuantityInStockTableColumn" prefWidth="75.0" text="Dernier stock" />
+                        <TableColumn fx:id="lastDateInStockTableColumn" prefWidth="75.0" text="Date dernier stock" />
+                        <TableColumn fx:id="stockAvailableTableColumn" prefWidth="75.0" text="Stock restant" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <Accordion maxWidth="600.0" minWidth="200.0" prefWidth="300.0">
+            <panes>
+                <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Ajouter une matière">
+                    <content>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                            <children>
+                                <Label text="Nom" />
+                                <TextField fx:id="rawMaterialNametextField" />
+                                <Label text="Unité">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <ChoiceBox fx:id="rawMaterialUnitChoiceBox" prefWidth="150.0" />
+                                <Label fx:id="stockUnitLabel" text="Quantité en stock">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <TextField fx:id="stockQuantitytextField" />
+                                <Label text="Date d'ajout">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <DatePicker fx:id="stockDatePicker" />
+                                <HBox alignment="TOP_RIGHT">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#handleSubmitAddRawMaterialButtonAction" text="Ajouter">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mettre à jour un stock">
+                    <content>
+                        <VBox>
+                            <children>
+                                <Label text="Matière" />
+                                <TextField fx:id="rawMaterialNameDisplayTextField" editable="false" promptText="Sélectionner une matière" />
+                                <Label fx:id="newStockQuantityLabel" text="Nouvelle quantité">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <TextField fx:id="newQuantityInStockTextField" />
+                                <Label text="Date de la modification">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <DatePicker fx:id="newDateInStockDatePicker" />
+                                <HBox alignment="TOP_RIGHT">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#handleSubmitModifiyStockButtonAction" text="Mettre à jour" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </items>
+</SplitPane>
