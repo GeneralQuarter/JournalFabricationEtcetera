@@ -48,6 +48,7 @@ CREATE TABLE stock_modification (
   rawMaterialID INT NOT NULL,
   date TEXT NOT NULL,
   quantity FLOAT NOT NULL,
+  description TEXT DEFAULT '' NOT NULL,
   UNIQUE (rawMaterialID, date),
   FOREIGN KEY (rawMaterialID) REFERENCES raw_material(id)
 );
@@ -61,5 +62,5 @@ CREATE VIEW stock_view AS
     AND s.date = (SELECT MAX(DATE(date)) FROM stock
                     WHERE rawMaterialID = rm.id);
 
-INSERT INTO unit (name, abr1000, abr1) VALUES ("kilogrammes", "kg", "g");
-INSERT INTO unit (name, abr1000, abr1) VALUES ("litres", "L", "mL");
+INSERT INTO unit (name, abr1000, abr1) VALUES ('kilogrammes', 'kg', 'g');
+INSERT INTO unit (name, abr1000, abr1) VALUES ('litres', 'L', 'mL');

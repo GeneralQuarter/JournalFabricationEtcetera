@@ -8,39 +8,38 @@ import java.time.LocalDate;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class StockView {
-    private int rawMaterialID;
-    private int stockID;
-    private int unitID;
+public class StockView extends ObjectWithUnit {
+    private RawMaterial rawMaterial;
+    private Stock stock;
     private StringProperty name;
     private FloatProperty lastQuantityInStock;
     private ObjectProperty<LocalDate> lastDateInStock;
     private FloatProperty stockAvailable;
 
-    public StockView(int rawMaterialID, int stockID, int unitID, String name, float lastQuantityInStock, String lastDateInStock, float stockAvailable) {
-        this.rawMaterialID = rawMaterialID;
-        this.stockID = stockID;
-        this.unitID = unitID;
+    public StockView(RawMaterial rawMaterial, Stock stock, Unit unit, String name, float lastQuantityInStock, String lastDateInStock, float stockAvailable) {
+        super(0, unit);
+        this.rawMaterial = rawMaterial;
+        this.stock = stock;
         this.name = new SimpleStringProperty(name);
         this.lastQuantityInStock = new SimpleFloatProperty(lastQuantityInStock);
         this.lastDateInStock = new SimpleObjectProperty<>(LocalDate.parse(lastDateInStock));
         this.stockAvailable = new SimpleFloatProperty(stockAvailable);
     }
 
-    public int getRawMaterialID() {
-        return rawMaterialID;
+    public RawMaterial getRawMaterial() {
+        return rawMaterial;
     }
 
-    public void setRawMaterialID(int rawMaterialID) {
-        this.rawMaterialID = rawMaterialID;
+    public void setRawMaterial(RawMaterial rawMaterial) {
+        this.rawMaterial = rawMaterial;
     }
 
-    public int getStockID() {
-        return stockID;
+    public Stock getStock() {
+        return stock;
     }
 
-    public void setStockID(int stockID) {
-        this.stockID = stockID;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public String getName() {
@@ -89,9 +88,5 @@ public class StockView {
 
     public void setStockAvailable(float stockAvailable) {
         this.stockAvailable.set(stockAvailable);
-    }
-
-    public int getUnitID() {
-        return unitID;
     }
 }

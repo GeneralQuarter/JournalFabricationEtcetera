@@ -9,14 +9,15 @@ import javafx.beans.property.SimpleObjectProperty;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class RecipeLine {
+public class RecipeLine extends ObjectWithUnit{
     private ObjectProperty<Recipe> recipe;
-    private ObjectProperty<RawMaterial> rawMaterial;
+    private RawMaterial rawMaterial;
     private FloatProperty quantity;
 
     public RecipeLine(Recipe recipe, RawMaterial rawMaterial, float quantity) {
+        super(0, rawMaterial.getUnit());
         this.recipe = new SimpleObjectProperty<>(recipe);
-        this.rawMaterial = new SimpleObjectProperty<>(rawMaterial);
+        this.rawMaterial = rawMaterial;
         this.quantity = new SimpleFloatProperty(quantity);
     }
 
@@ -33,15 +34,11 @@ public class RecipeLine {
     }
 
     public RawMaterial getRawMaterial() {
-        return rawMaterial.get();
-    }
-
-    public ObjectProperty<RawMaterial> rawMaterialProperty() {
         return rawMaterial;
     }
 
     public void setRawMaterial(RawMaterial rawMaterial) {
-        this.rawMaterial.set(rawMaterial);
+        this.rawMaterial = rawMaterial;
     }
 
     public float getQuantity() {

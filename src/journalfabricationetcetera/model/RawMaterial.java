@@ -9,23 +9,12 @@ import javafx.beans.property.StringProperty;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class RawMaterial {
-    private int id;
+public class RawMaterial extends ObjectWithUnit{
     private StringProperty name;
-    private ObjectProperty<Unit> unit;
 
     public RawMaterial(int id, String name, Unit unit) {
-        this.id = id;
+        super(id, unit);
         this.name = new SimpleStringProperty(name);
-        this.unit = new SimpleObjectProperty<>(unit);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -38,17 +27,5 @@ public class RawMaterial {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public Unit getUnit() {
-        return unit.get();
-    }
-
-    public ObjectProperty<Unit> unitProperty() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit.set(unit);
     }
 }

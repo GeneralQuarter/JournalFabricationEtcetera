@@ -6,10 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import journalfabricationetcetera.controller.MainController;
+import journalfabricationetcetera.db.Data;
 import journalfabricationetcetera.db.Database;
 
 import java.io.IOException;
@@ -44,14 +46,16 @@ public class Main extends Application {
         Parent root = null;
         controller = null;
         Database d = new Database();
+        Data data = new Data(d);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vue/main.fxml"));
             root = fxmlLoader.load();
             Scene scene = new Scene(root, 800, 600);
             controller = fxmlLoader.<MainController>getController();
-            controller.setDB(d);
+            controller.setData(data);
             primaryStage.setTitle("Journal Fabrication Etcetera");
+            primaryStage.getIcons().add(new Image("file:resources/icone.png"));
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

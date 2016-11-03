@@ -6,25 +6,16 @@ import java.time.LocalDate;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class Stock {
-    private int id;
+public class Stock extends ObjectWithId{
     private RawMaterial rawMaterial;
     private LocalDate date;
     private float quantity;
 
     public Stock(int id, RawMaterial rawMaterial, LocalDate date, float quantity) {
-        this.id = id;
+        super(id);
         this.rawMaterial = rawMaterial;
         this.date = date;
         this.quantity = quantity;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public RawMaterial getRawMaterial() {

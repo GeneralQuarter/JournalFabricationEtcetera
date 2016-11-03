@@ -23,17 +23,22 @@
    <tabs>
      <Tab text="Journal">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <fx:include fx:id="journalTab" source="journal.fxml" />
         </content>
      </Tab>
      <Tab text="Inventaire">
         <content>
-            <fx:include fx:id="inventoryTab" source="inventory.fxml"/>
+            <fx:include fx:id="inventoryTab" source="inventory.fxml" />
         </content>
        </Tab>
       <Tab text="Recettes">
         <content>
-            <fx:include fx:id="recipesTab" source="recipes.fxml"/>
+            <fx:include fx:id="recipesTab" source="recipes.fxml" />
+        </content>
+      </Tab>
+      <Tab text="Consommation">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
    </tabs>
