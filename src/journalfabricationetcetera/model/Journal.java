@@ -4,7 +4,6 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 
@@ -12,7 +11,7 @@ import java.time.LocalDate;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class Journal extends ObjectWithId{
+public class Journal extends ObjectWithId implements ObjectWithRecipe{
     private Recipe recipe;
     private ObjectProperty<LocalDate> date;
     private FloatProperty multiplier;
@@ -24,6 +23,7 @@ public class Journal extends ObjectWithId{
         this.multiplier = new SimpleFloatProperty(multiplier);
     }
 
+    @Override
     public Recipe getRecipe() {
         return recipe;
     }

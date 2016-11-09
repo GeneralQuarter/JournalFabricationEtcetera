@@ -1,13 +1,10 @@
 package journalfabricationetcetera;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import journalfabricationetcetera.controller.MainController;
@@ -31,19 +28,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWING, new  EventHandler<WindowEvent>()
-        {
-            @Override
-            public void handle(WindowEvent window)
-            {
-                System.out.println("[Main] window shown");
-                if(controller != null) {
-                    controller.afterInitialize();
-                }
+        primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWING, window -> {
+            System.out.println("[Main] window shown");
+            if(controller != null) {
+                controller.afterInitialize();
             }
         });
 
-        Parent root = null;
+        Parent root;
         controller = null;
         Database d = new Database();
         Data data = new Data(d);
@@ -52,7 +44,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vue/main.fxml"));
             root = fxmlLoader.load();
             Scene scene = new Scene(root, 800, 600);
-            controller = fxmlLoader.<MainController>getController();
+            controller = fxmlLoader.getController();
             controller.setData(data);
             primaryStage.setTitle("Journal Fabrication Etcetera");
             primaryStage.getIcons().add(new Image("file:resources/icone.png"));
@@ -62,8 +54,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        primaryStage.setOnCloseRequest(event -> {
-            d.closeConnection();
-        });
+        primaryStage.setOnCloseRequest(event -> d.closeConnection());
     }
 }

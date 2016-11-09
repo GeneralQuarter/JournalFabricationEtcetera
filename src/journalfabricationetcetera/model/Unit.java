@@ -1,11 +1,5 @@
 package journalfabricationetcetera.model;
 
-import javafx.collections.ObservableList;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-
 /**
  * Created by Quentin Gangler on 21/10/2016.
  *

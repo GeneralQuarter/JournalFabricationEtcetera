@@ -8,7 +8,6 @@ import journalfabricationetcetera.model.RawMaterial;
 import journalfabricationetcetera.model.RecipeLine;
 import journalfabricationetcetera.model.Unit;
 
-import javax.swing.text.DateFormatter;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 
@@ -57,13 +56,18 @@ public class Utils {
     }
 
     public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = createAlert(alertType, title, message);
+        alert.show();
+    }
+
+    public static Alert createAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.setHeaderText(null);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image("file:resources/icone.png"));
-        alert.show();
+        return alert;
     }
 
     public static boolean containsRawMaterial(ObservableList<RecipeLine> recipeLines, RawMaterial rm) {

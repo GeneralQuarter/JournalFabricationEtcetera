@@ -89,6 +89,12 @@ public class RecipesController extends SubController implements Initializable {
     private void initializeRecipeTableView() {
         recipeNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         recipeNameTableColumn.setCellFactory(RecipeTableCell::new);
+        recipeTableView.setOnKeyReleased(event -> {
+            Recipe selected = recipeTableView.getSelectionModel().getSelectedItem();
+            if (event.getCode() == KeyCode.DELETE && selected != null) {
+                confirmDeleteRecipe(selected);
+            }
+        });
         recipeTableView.setItems(data.recipes);
         updateRecipeTableView();
     }
@@ -119,6 +125,23 @@ public class RecipesController extends SubController implements Initializable {
         recipeNameTextField.setText(null);
         updateRecipeLinesTableView();
         updateRecipeTableView();
+    }
+
+    private void confirmDeleteRecipe(Recipe recipe) {
+        Alert alert = Utils.createAlert(Alert.AlertType.CONFIRMATION, "Supprimer une matière", "Voulez vous vraiment supprimer \"" + recipe.getName() + "\"");
+        alert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> deleteEntryToRecipe(recipe));
+    }
+
+    private void deleteEntryToRecipe(Recipe recipe) {
+        if (data.getDb().isRecipeUsed(recipe)) {
+            Utils.showAlert(Alert.AlertType.ERROR, "La recette est utilisé dans le journal", "Cette recette est utilisée dans le journal, elle ne peux pas être supprimée");
+        } else {
+            if (data.getDb().deleteRecipe(recipe)) {
+                updateRecipeTableView();
+            }
+        }
     }
 
     @FXML protected void handleSaveRecipe() {

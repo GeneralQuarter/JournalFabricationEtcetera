@@ -1,7 +1,5 @@
 package journalfabricationetcetera.model;
 
-import javafx.beans.property.ObjectProperty;
-
 /**
  * Created by Quentin Gangler on 01/11/2016.
  *

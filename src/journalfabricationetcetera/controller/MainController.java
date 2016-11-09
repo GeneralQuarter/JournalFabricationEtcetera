@@ -1,7 +1,5 @@
 package journalfabricationetcetera.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,6 +19,7 @@ public class MainController extends SubController implements Initializable {
     @FXML private InventoryController inventoryTabController;
     @FXML private RecipesController recipesTabController;
     @FXML private JournalController journalTabController;
+    @FXML private ConsumptionController consumptionTabController;
 
     private List<SubController> controllers;
 
@@ -32,7 +31,7 @@ public class MainController extends SubController implements Initializable {
     @Override
     public void afterInitialize() {
         SingleSelectionModel<Tab> selectionModel = mainTabPane.getSelectionModel();
-        selectionModel.select(2);
+        selectionModel.select(0);
 
         selectionModel.selectedItemProperty().addListener(
                 (ov, t, t1) -> updateForTab(selectionModel.getSelectedIndex())
@@ -41,6 +40,7 @@ public class MainController extends SubController implements Initializable {
         controllers.add(journalTabController);
         controllers.add(inventoryTabController);
         controllers.add(recipesTabController);
+        controllers.add(consumptionTabController);
 
         for (SubController sub : controllers) {
             sub.setData(data);

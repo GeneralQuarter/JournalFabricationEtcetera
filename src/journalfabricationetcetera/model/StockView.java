@@ -14,16 +14,14 @@ public class StockView extends ObjectWithUnit {
     private StringProperty name;
     private FloatProperty lastQuantityInStock;
     private ObjectProperty<LocalDate> lastDateInStock;
-    private FloatProperty stockAvailable;
 
-    public StockView(RawMaterial rawMaterial, Stock stock, Unit unit, String name, float lastQuantityInStock, String lastDateInStock, float stockAvailable) {
+    public StockView(RawMaterial rawMaterial, Stock stock, Unit unit, String name, float lastQuantityInStock, String lastDateInStock) {
         super(0, unit);
         this.rawMaterial = rawMaterial;
         this.stock = stock;
         this.name = new SimpleStringProperty(name);
         this.lastQuantityInStock = new SimpleFloatProperty(lastQuantityInStock);
         this.lastDateInStock = new SimpleObjectProperty<>(LocalDate.parse(lastDateInStock));
-        this.stockAvailable = new SimpleFloatProperty(stockAvailable);
     }
 
     public RawMaterial getRawMaterial() {
@@ -76,17 +74,5 @@ public class StockView extends ObjectWithUnit {
 
     public void setLastDateInStock(LocalDate lastDateInStock) {
         this.lastDateInStock.set(lastDateInStock);
-    }
-
-    public float getStockAvailable() {
-        return stockAvailable.get();
-    }
-
-    public FloatProperty stockAvailableProperty() {
-        return stockAvailable;
-    }
-
-    public void setStockAvailable(float stockAvailable) {
-        this.stockAvailable.set(stockAvailable);
     }
 }

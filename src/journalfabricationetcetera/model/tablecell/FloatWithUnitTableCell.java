@@ -1,9 +1,6 @@
 package journalfabricationetcetera.model.tablecell;
 
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import journalfabricationetcetera.Utils;
 import journalfabricationetcetera.model.ObjectWithUnit;
 import journalfabricationetcetera.model.Unit;

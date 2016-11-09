@@ -4,7 +4,6 @@ import javafx.scene.control.TableCell;
 import journalfabricationetcetera.Utils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Created by Quentin Gangler on 01/11/2016.

@@ -1,20 +1,18 @@
 package journalfabricationetcetera.model.tablecell;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import journalfabricationetcetera.Utils;
 
 /**
  * Created by Quentin Gangler on 03/11/2016.
  *
  */
-public abstract class FloatEditableTableCell<S> extends TableCell<S, Float> {
+abstract class FloatEditableTableCell<S> extends TableCell<S, Float> {
 
-    protected TextField textField;
+    TextField textField;
 
-    public FloatEditableTableCell() {
+    FloatEditableTableCell() {
         super();
     }
 

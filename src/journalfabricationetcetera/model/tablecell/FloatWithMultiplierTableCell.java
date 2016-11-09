@@ -1,18 +1,13 @@
 package journalfabricationetcetera.model.tablecell;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import journalfabricationetcetera.Utils;
-import journalfabricationetcetera.model.Journal;
-import journalfabricationetcetera.model.Unit;
 
 /**
  * Created by Quentin Gangler on 03/11/2016.
  *
  */
-public class FloatWithMultiplierTableCell extends FloatEditableTableCell<Journal> {
+public class FloatWithMultiplierTableCell<S> extends FloatEditableTableCell<S> {
 
     public FloatWithMultiplierTableCell() {
         super();

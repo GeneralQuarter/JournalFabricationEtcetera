@@ -1,10 +1,10 @@
 package journalfabricationetcetera.db;
 
 import javafx.collections.ObservableList;
-import journalfabricationetcetera.Utils;
 import journalfabricationetcetera.model.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,5 +110,35 @@ public class Data {
             }
         }
         return false;
+    }
+
+    public ObservableList<RawMaterialConsumption> getRawMaterialConsumptionByDates(LocalDate start, LocalDate end) {
+        String startStr = start.toString();
+        String endStr = end.toString();
+        return db.selectAllRawMaterialConsumptionBetweenDates(startStr, endStr);
+    }
+
+    public ObservableList<RecipeConsumption> getRecipeConsumptionByDates(LocalDate start, LocalDate end) {
+        String startStr = start.toString();
+        String endStr = end.toString();
+        return db.selectAllRecipeConsumptionBetweenDates(startStr, endStr);
+    }
+
+    public ObservableList<StockModification> getStockModificationsByDates(LocalDate start, LocalDate end) {
+        String startStr = start.toString();
+        String endStr = end.toString();
+        return db.selectAllStockModificationBetweenDates(startStr, endStr);
+    }
+
+    void removeAllStockViewFromRawMaterial(RawMaterial rawMaterial) {
+        ArrayList<StockView> toRemove = new ArrayList<>();
+        for (StockView stockView : stockViews) {
+            if(stockView.getRawMaterial().getId() == rawMaterial.getId()) {
+                toRemove.add(stockView);
+            }
+        }
+        if(!toRemove.isEmpty()) {
+            stockViews.removeAll(toRemove);
+        }
     }
 }

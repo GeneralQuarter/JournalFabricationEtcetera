@@ -10,7 +10,7 @@ import journalfabricationetcetera.Utils;
  * Created by Quentin Gangler on 21/10/2016.
  *
  */
-public class Recipe extends ObjectWithId{
+public class Recipe extends ObjectWithId implements ObjectWithRecipe{
     private StringProperty name;
     private ObservableList<RecipeLine> lines;
 
@@ -47,5 +47,10 @@ public class Recipe extends ObjectWithId{
             output += "\n";
         }
         return output;
+    }
+
+    @Override
+    public Recipe getRecipe() {
+        return this;
     }
 }

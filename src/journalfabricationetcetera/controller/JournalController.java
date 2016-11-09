@@ -127,6 +127,7 @@ public class JournalController extends SubController implements Initializable {
     private void initializeRecipesProducedTable() {
         recipesProducedTableView.setEditable(true);
         recipeProducedNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().getRecipe().nameProperty());
+        recipeProducedNameTableColumn.setCellFactory(RecipeTableCell::new);
         recipeProducedMultiplierTableColumn.setCellValueFactory(cellData -> cellData.getValue().multiplierProperty().asObject());
         recipeProducedMultiplierTableColumn.setCellFactory(param -> new FloatWithMultiplierTableCell());
         recipeProducedMultiplierTableColumn.setOnEditCommit(t ->

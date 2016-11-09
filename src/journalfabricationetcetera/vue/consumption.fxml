@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="journalfabricationetcetera.controller.ConsumptionController">
+   <children>
+      <HBox>
+         <children>
+            <Label fx:id="titleLabel" maxHeight="1.7976931348623157E308" text="Rapport de consommation entre Hier et Aujourd'hui">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" text="Début :">
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                        <DatePicker fx:id="startDatePicker" />
+                        <Label maxHeight="1.7976931348623157E308" text="Fin : ">
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <DatePicker fx:id="endDatePicker" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <SplitPane dividerPositions="0.2, 0.5" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="recipesProducedTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="recipeProduceNameTableColumn" prefWidth="75.0" text="Recette" />
+                      <TableColumn fx:id="recipeProducedQuantityTableColumn" prefWidth="75.0" text="Nombre produite" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="stockModificationTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="stockMaterialNameTableColumn" prefWidth="75.0" text="Matière" />
+                      <TableColumn fx:id="stockChangeValueTableColumn" prefWidth="75.0" text="Changement" />
+                        <TableColumn fx:id="stockChangeDescriptionTableColumn" prefWidth="75.0" text="Description" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="rawMaterialConsumptionTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="rawMaterialNameTableColumn" prefWidth="75.0" text="Matière" />
+                      <TableColumn fx:id="rawMaterialStockStartTableColumn" prefWidth="75.0" text="Stock hier" />
+                        <TableColumn fx:id="rawMaterialEndStockTableColumn" prefWidth="75.0" text="Stock aujourd'hui" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

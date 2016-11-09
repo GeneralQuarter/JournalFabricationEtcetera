@@ -1,7 +1,5 @@
 package journalfabricationetcetera.model;
 
-import javafx.collections.ObservableList;
-
 /**
  * Created by Quentin Gangler on 03/11/2016.
  *
@@ -9,7 +7,7 @@ import javafx.collections.ObservableList;
 public abstract class ObjectWithId {
     protected int id;
 
-    public ObjectWithId(int id) {
+    ObjectWithId(int id) {
         this.id = id;
     }
 

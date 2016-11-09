@@ -1,9 +1,9 @@
 package journalfabricationetcetera.controller;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import journalfabricationetcetera.Utils;
 import journalfabricationetcetera.model.RawMaterial;
 import journalfabricationetcetera.model.Stock;
@@ -34,7 +34,6 @@ public class InventoryController extends SubController implements Initializable{
     @FXML private TableView<StockView> stockTableView;
     @FXML private TableColumn<StockView, Float> lastQuantityInStockTableColumn;
     @FXML private TableColumn<StockView, LocalDate> lastDateInStockTableColumn;
-    @FXML private TableColumn<StockView, Float> stockAvailableTableColumn;
     @FXML private TableColumn<StockView, String> nameTableColumn;
 
     private StockView rowSelected;
@@ -67,7 +66,6 @@ public class InventoryController extends SubController implements Initializable{
         nameTableColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         lastQuantityInStockTableColumn.setCellValueFactory(cellData -> cellData.getValue().lastQuantityInStockProperty().asObject());
         lastDateInStockTableColumn.setCellValueFactory(cellData -> cellData.getValue().lastDateInStockProperty());
-        stockAvailableTableColumn.setCellValueFactory(cellData -> cellData.getValue().stockAvailableProperty().asObject());
         lastDateInStockTableColumn.setCellFactory(param -> new DateTableCell<>());
         lastQuantityInStockTableColumn.setCellFactory(FloatWithUnitTableCell::new);
         stockTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -75,6 +73,12 @@ public class InventoryController extends SubController implements Initializable{
                 rowSelected = newSelection;
                 rawMaterialNameDisplayTextField.setText(rowSelected.getName());
                 newStockQuantityLabel.setText("Nouvelle quantité (" + rowSelected.getUnit().getAbr1000() + ")");
+            }
+        });
+        stockTableView.setOnKeyReleased(event -> {
+            StockView selected = stockTableView.getSelectionModel().getSelectedItem();
+            if (event.getCode() == KeyCode.DELETE && selected != null) {
+                confirmDeleteRawMaterial(selected.getRawMaterial());
             }
         });
         stockTableView.setItems(data.stockViews);
@@ -89,6 +93,23 @@ public class InventoryController extends SubController implements Initializable{
                                 "Quantité en stock (" + data.units.get(newValue.intValue()).getAbr1000() + ")"
                         ));
         rawMaterialUnitChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    private void confirmDeleteRawMaterial(RawMaterial rawMaterial) {
+        Alert alert = Utils.createAlert(Alert.AlertType.CONFIRMATION, "Supprimer une matière", "Voulez vous vraiment supprimer \"" + rawMaterial.getName() + "\"");
+        alert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> deleteEntryToRawMaterial(rawMaterial));
+    }
+
+    private void deleteEntryToRawMaterial(RawMaterial rawMaterial) {
+        if(data.getDb().isRawMaterialUsed(rawMaterial)) {
+            Utils.showAlert(Alert.AlertType.ERROR, "La matière est utilisé pour une recette ou une modification de stock", "Cette matière est utilisée pour une recette ou une modification de stock elle ne peux pas être supprimée");
+        } else {
+            if(data.getDb().deleteRawMaterialAndStock(rawMaterial)) {
+                updateTable();
+            }
+        }
     }
 
     @FXML protected void handleSubmitAddRawMaterialButtonAction() {
@@ -120,9 +141,11 @@ public class InventoryController extends SubController implements Initializable{
             quantity = Utils.validateFloatNumber(newQuantityInStockTextField.getText());
             if(quantity != -1) {
                 Stock stock = data.getDb().insertInStock(rowSelected.getRawMaterial(), quantity, newDateInStockDatePicker.getValue());
-                rowSelected.setLastDateInStock(stock.getDate());
-                rowSelected.setLastQuantityInStock(stock.getQuantity());
-                updateTable();
+                if (stock != null) {
+                    rowSelected.setLastDateInStock(stock.getDate());
+                    rowSelected.setLastQuantityInStock(stock.getQuantity());
+                    updateTable();
+                }
             }
         }
     }
